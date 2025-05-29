@@ -1,5 +1,4 @@
 from datetime import datetime
-from decimal import Decimal
 from typing import Any
 
 from bson import ObjectId
@@ -19,7 +18,7 @@ class WidgetBase(BaseModel):
 
     @model_validator(mode='before')
     @classmethod
-    def model_validate(cls, data: Any) -> Any:
+    def validate_model(cls, data: Any) -> Any:
         for field in ["name", "description", "category"]:
             if field in data and data[field]:
                 data[field] = sanitize_string(data[field])
